@@ -1,0 +1,132 @@
+<!doctype html>
+<html
+  lang="de"
+  data-composition-variables='[
+    {"id":"rot","type":"color","label":"Markenrot","default":"#E21C21"},
+    {"id":"braun","type":"color","label":"Markenbraun","default":"#57352C"},
+    {"id":"blau","type":"color","label":"Himmelblau","default":"#5F9DE5"},
+    {"id":"gelb","type":"color","label":"Sonnengelb","default":"#FBC84A"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Tag des Hundes – Werbespot</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      /* Markenwerte von www.tag-des-hundes.ch
+         Rot #E21C21 · Braun #57352C · Blau #5F9DE5 · Gelb #FBC84A
+         Website-Schriften: Brandon Grotesque (Titel) → hier "Outfit", Open Sans (Text) */
+      :root {
+        --rot: #e21c21;
+        --braun: #57352c;
+        --blau: #5f9de5;
+        --gelb: #fbc84a;
+        --weiss: #ffffff;
+        --text: #333333;
+        --font-titel: "Outfit", "Montserrat", sans-serif;
+        --font-text: "Open Sans", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--weiss);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--weiss);
+        font-family: var(--font-text);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="intro"
+        data-composition-id="intro"
+        data-composition-src="compositions/intro.html"
+        data-start="0"
+        data-duration="4"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="hero"
+        data-composition-id="hero"
+        data-composition-src="compositions/hero.html"
+        data-start="4"
+        data-duration="5.5"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="zahl"
+        data-composition-id="zahl"
+        data-composition-src="compositions/zahl.html"
+        data-start="9.5"
+        data-duration="5.5"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="erlebnis"
+        data-composition-id="erlebnis"
+        data-composition-src="compositions/erlebnis.html"
+        data-start="15"
+        data-duration="6"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="willkommen"
+        data-composition-id="willkommen"
+        data-composition-src="compositions/willkommen.html"
+        data-start="21"
+        data-duration="4"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+      <div
+        id="endcard"
+        data-composition-id="endcard"
+        data-composition-src="compositions/endcard.html"
+        data-start="25"
+        data-duration="5"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1920"
+        data-height="1080"
+      ></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

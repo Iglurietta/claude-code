@@ -1,0 +1,130 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    .intro-pfote {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+    }
+    .intro-pfote svg {
+      width: 100%;
+      height: 100%;
+      fill: #e21c21;
+    }
+    #intro-logo {
+      position: absolute;
+      left: 360px;
+      top: 451px;
+      width: 1200px;
+      height: 178px;
+    }
+    #intro-logo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    /* Hund-Icon exakt über dem "G" des Logos (viewBox 58 -2 52 66, Massstab 1200/419) */
+    #intro-icon {
+      position: absolute;
+      left: 526px;
+      top: 445px;
+      width: 149px;
+      height: 189px;
+    }
+    #intro-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #intro-claim {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 690px;
+      text-align: center;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      font-size: 44px;
+      color: #57352c;
+      letter-spacing: 0.02em;
+    }
+    #intro-claim-txt {
+      display: inline-block;
+    }
+    #intro-wipe {
+      position: absolute;
+      inset: 0;
+      background: #e21c21;
+    }
+  </style>
+  <div id="root" data-composition-id="intro" data-width="1920" data-height="1080">
+    <!-- Pfotenspur quer durchs Bild -->
+    <div class="intro-pfote" id="intro-p1" style="left: 140px; top: 900px"><svg viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="24" ry="20"/><ellipse cx="22" cy="40" rx="10" ry="13"/><ellipse cx="40" cy="22" rx="10" ry="13"/><ellipse cx="62" cy="22" rx="10" ry="13"/><ellipse cx="80" cy="40" rx="10" ry="13"/></svg></div>
+    <div class="intro-pfote" id="intro-p2" style="left: 300px; top: 820px"><svg viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="24" ry="20"/><ellipse cx="22" cy="40" rx="10" ry="13"/><ellipse cx="40" cy="22" rx="10" ry="13"/><ellipse cx="62" cy="22" rx="10" ry="13"/><ellipse cx="80" cy="40" rx="10" ry="13"/></svg></div>
+    <div class="intro-pfote" id="intro-p3" style="left: 1470px; top: 230px"><svg viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="24" ry="20"/><ellipse cx="22" cy="40" rx="10" ry="13"/><ellipse cx="40" cy="22" rx="10" ry="13"/><ellipse cx="62" cy="22" rx="10" ry="13"/><ellipse cx="80" cy="40" rx="10" ry="13"/></svg></div>
+    <div class="intro-pfote" id="intro-p4" style="left: 1630px; top: 150px"><svg viewBox="0 0 100 100"><ellipse cx="50" cy="68" rx="24" ry="20"/><ellipse cx="22" cy="40" rx="10" ry="13"/><ellipse cx="40" cy="22" rx="10" ry="13"/><ellipse cx="62" cy="22" rx="10" ry="13"/><ellipse cx="80" cy="40" rx="10" ry="13"/></svg></div>
+
+    <div id="intro-logo" class="clip" data-start="0" data-duration="4">
+      <img id="intro-logo-img" src="assets/logo.svg" alt="Tag des Hundes" />
+    </div>
+    <div id="intro-icon" class="clip" data-start="0" data-duration="4">
+      <img id="intro-icon-img" src="assets/hund-icon.svg" alt="" />
+    </div>
+    <p id="intro-claim" class="clip" data-start="0" data-duration="4">
+      <span id="intro-claim-txt">Der Festtag für Hunde und ihre Menschen</span>
+    </p>
+    <div id="intro-wipe" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // Hund-Icon fällt gross ins Bild und landet im "G" des Logos
+    tl.fromTo(
+      "#intro-icon-img",
+      { scale: 2.6, y: -700, rotation: -12 },
+      { scale: 2.6, y: 0, rotation: 0, duration: 0.7, ease: "bounce.out" },
+      0.1,
+    );
+    tl.to("#intro-icon-img", { scale: 1, duration: 0.55, ease: "back.inOut(1.6)" }, 1.0);
+
+    // Schriftzug wischt von der Mitte nach aussen auf
+    tl.fromTo(
+      "#intro-logo-img",
+      { clipPath: "inset(0% 63% 0% 37%)", opacity: 0 },
+      { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 0.7, ease: "power3.out" },
+      1.2,
+    );
+
+    // Pfotenspur
+    ["#intro-p1", "#intro-p2", "#intro-p3", "#intro-p4"].forEach((id, i) => {
+      tl.fromTo(
+        id,
+        { opacity: 0, scale: 0.4, rotation: 30 },
+        { opacity: 0.9, scale: 1, rotation: 30, duration: 0.25, ease: "back.out(2.5)" },
+        0.3 + i * 0.28,
+      );
+    });
+
+    tl.fromTo(
+      "#intro-claim-txt",
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+      1.9,
+    );
+
+    // leichtes Atmen, dann roter Wischer zur nächsten Szene
+    tl.fromTo("#intro-icon-img", { rotation: 0 }, { rotation: -6, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut", immediateRender: false }, 2.2);
+    tl.fromTo(
+      "#intro-wipe",
+      { xPercent: -100 },
+      { xPercent: 0, duration: 0.45, ease: "power3.in" },
+      3.5,
+    );
+    window.__timelines["intro"] = tl;
+  </script>
+</template>

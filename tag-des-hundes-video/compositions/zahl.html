@@ -1,0 +1,140 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    #zahl-kreis {
+      position: absolute;
+      left: 610px;
+      top: 90px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: #fbc84a;
+    }
+    #zahl-ueber {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 180px;
+      text-align: center;
+    }
+    #zahl-ueber-in {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 64px;
+      color: #57352c;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    #zahl-wert {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 250px;
+      text-align: center;
+    }
+    #zahl-wert-in {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      font-size: 300px;
+      line-height: 1;
+      color: #e21c21;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    #zahl-label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 575px;
+      text-align: center;
+    }
+    #zahl-label-in {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 76px;
+      color: #57352c;
+    }
+    #zahl-text {
+      position: absolute;
+      left: 260px;
+      right: 260px;
+      top: 845px;
+      text-align: center;
+    }
+    #zahl-text-in {
+      display: inline-block;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      font-size: 42px;
+      line-height: 1.35;
+      color: #333333;
+    }
+    #zahl-wipe-ein,
+    #zahl-wipe-aus {
+      position: absolute;
+      inset: 0;
+      background: #e21c21;
+    }
+  </style>
+  <div id="root" data-composition-id="zahl" data-width="1920" data-height="1080">
+    <div id="zahl-kreis" data-layout-ignore></div>
+    <div id="zahl-ueber" class="clip" data-start="0" data-duration="5.5">
+      <span id="zahl-ueber-in">Über</span>
+    </div>
+    <div id="zahl-wert" class="clip" data-start="0" data-duration="5.5">
+      <span id="zahl-wert-in">500'000</span>
+    </div>
+    <div id="zahl-label" class="clip" data-start="0" data-duration="5.5">
+      <span id="zahl-label-in">Hunde leben in der Schweiz.</span>
+    </div>
+    <div id="zahl-text" class="clip" data-start="0" data-duration="5.5">
+      <span id="zahl-text-in"
+        >Sie schenken uns Lebensfreude – und leisten als Blinden- oder Rettungshunde wertvolle Dienste.</span
+      >
+    </div>
+    <div id="zahl-wipe-ein" data-layout-ignore></div>
+    <div id="zahl-wipe-aus" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const wert = document.querySelector("#zahl-wert-in");
+    const zaehler = { n: 0 };
+    const format = (n) => String(Math.round(n / 1000) * 1000).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+
+    tl.fromTo("#zahl-wipe-ein", { xPercent: 0 }, { xPercent: 100, duration: 0.5, ease: "power3.out" }, 0);
+
+    tl.fromTo("#zahl-kreis", { scale: 0 }, { scale: 1, duration: 0.7, ease: "back.out(1.5)" }, 0.15);
+    tl.fromTo("#zahl-ueber-in", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.35);
+
+    // Zähler 0 → 500'000 (rein zeitabhängig, daher beim Seeken stabil)
+    tl.fromTo(
+      zaehler,
+      { n: 0 },
+      {
+        n: 500000,
+        duration: 1.6,
+        ease: "power2.out",
+        onUpdate: () => {
+          wert.textContent = format(zaehler.n);
+        },
+      },
+      0.4,
+    );
+    tl.fromTo("#zahl-wert-in", { scale: 0.6 }, { scale: 1, duration: 0.6, ease: "back.out(2)" }, 0.4);
+    tl.fromTo("#zahl-wert-in", { scale: 1 }, { scale: 1.08, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out", immediateRender: false }, 2.0);
+
+    tl.fromTo("#zahl-label-in", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 1.4);
+    tl.fromTo("#zahl-text-in", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.75);
+
+    tl.fromTo("#zahl-wipe-aus", { xPercent: -100 }, { xPercent: 0, duration: 0.45, ease: "power3.in" }, 5.0);
+    window.__timelines["zahl"] = tl;
+  </script>
+</template>

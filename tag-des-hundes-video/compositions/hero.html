@@ -1,0 +1,106 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    /* Headerbild der Website (1920×1027), unten bündig: Ohren ragen in den weissen Rand */
+    #hero-bild {
+      position: absolute;
+      left: 0;
+      top: 53px;
+      width: 1920px;
+      height: 1027px;
+    }
+    #hero-bild img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #hero-band {
+      position: absolute;
+      left: 110px;
+      top: 210px;
+    }
+    #hero-band-in {
+      display: inline-block;
+      background: #e21c21;
+      color: #ffffff;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 54px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 14px 34px 16px;
+      box-shadow: 0 10px 0 rgba(87, 53, 44, 0.18);
+    }
+    #hero-titel {
+      position: absolute;
+      left: 110px;
+      top: 330px;
+      width: 760px;
+    }
+    #hero-titel-in {
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 58px;
+      line-height: 1.1;
+      color: #ffffff;
+      background: #57352c;
+      display: inline-block;
+      padding: 10px 28px 16px;
+    }
+    #hero-wipe-ein,
+    #hero-wipe-aus {
+      position: absolute;
+      inset: 0;
+      background: #e21c21;
+    }
+  </style>
+  <div id="root" data-composition-id="hero" data-width="1920" data-height="1080">
+    <div id="hero-bild" class="clip" data-start="0" data-duration="5.5">
+      <img id="hero-bild-img" src="assets/hero-hunde.jpg" alt="Zwei Jack Russell Terrier springen über eine Wiese" />
+    </div>
+    <div id="hero-band" class="clip" data-start="0" data-duration="5.5">
+      <span id="hero-band-in">Ganze Schweiz</span>
+    </div>
+    <div id="hero-titel" class="clip" data-start="0" data-duration="5.5">
+      <p id="hero-titel-in">Ein Tag voller Hundefreude!</p>
+    </div>
+    <div id="hero-wipe-ein" data-layout-ignore></div>
+    <div id="hero-wipe-aus" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    // roter Vorhang öffnet nach rechts
+    tl.fromTo("#hero-wipe-ein", { xPercent: 0 }, { xPercent: 100, duration: 0.5, ease: "power3.out" }, 0);
+
+    // langsamer Zoom-out: das Datum im Bild wird lesbar
+    tl.fromTo(
+      "#hero-bild-img",
+      { scale: 1.28, transformOrigin: "50% 30%" },
+      { scale: 1, duration: 5.3, ease: "power2.out" },
+      0,
+    );
+
+    tl.fromTo(
+      "#hero-band-in",
+      { xPercent: -130, rotation: -3 },
+      { xPercent: 0, rotation: -3, duration: 0.55, ease: "back.out(1.7)" },
+      0.9,
+    );
+    tl.fromTo(
+      "#hero-titel-in",
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+      1.3,
+    );
+
+    // Wischer zur nächsten Szene
+    tl.fromTo("#hero-wipe-aus", { xPercent: -100 }, { xPercent: 0, duration: 0.45, ease: "power3.in" }, 5.0);
+    window.__timelines["hero"] = tl;
+  </script>
+</template>

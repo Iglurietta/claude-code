@@ -1,0 +1,82 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #5f9de5;
+      overflow: hidden;
+    }
+    .wk-zeile {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+    .wk-zeile span {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      color: #57352c;
+    }
+    #wk-z1 {
+      top: 170px;
+    }
+    #wk-z2 {
+      top: 300px;
+    }
+    #wk-z3 {
+      top: 430px;
+    }
+    #wk-z1 span,
+    #wk-z2 span,
+    #wk-z3 span {
+      font-size: 96px;
+    }
+    #wk-z4 {
+      top: 680px;
+    }
+    #wk-z4 span {
+      font-size: 130px;
+      color: #57352c;
+      background: #fbc84a;
+      padding: 6px 48px 18px;
+    }
+    #wk-wipe-ein,
+    #wk-wipe-aus {
+      position: absolute;
+      inset: 0;
+      background: #e21c21;
+    }
+  </style>
+  <div id="root" data-composition-id="willkommen" data-width="1920" data-height="1080">
+    <div id="wk-z1" class="wk-zeile clip" data-start="0" data-duration="4"><span id="wk-z1-in">Hundekenner?</span></div>
+    <div id="wk-z2" class="wk-zeile clip" data-start="0" data-duration="4"><span id="wk-z2-in">Frisch auf den Hund gekommen?</span></div>
+    <div id="wk-z3" class="wk-zeile clip" data-start="0" data-duration="4"><span id="wk-z3-in">Noch am Überlegen?</span></div>
+    <div id="wk-z4" class="wk-zeile clip" data-start="0" data-duration="4"><span id="wk-z4-in">Alle sind willkommen!</span></div>
+    <div id="wk-wipe-ein" data-layout-ignore></div>
+    <div id="wk-wipe-aus" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#wk-wipe-ein", { xPercent: 0 }, { xPercent: 100, duration: 0.5, ease: "power3.out" }, 0);
+
+    ["#wk-z1-in", "#wk-z2-in", "#wk-z3-in"].forEach((id, i) => {
+      tl.fromTo(
+        id,
+        { opacity: 0, y: 60, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)" },
+        0.3 + i * 0.45,
+      );
+    });
+    tl.to(["#wk-z1-in", "#wk-z2-in", "#wk-z3-in"], { opacity: 0.6, duration: 0.3 }, 1.8);
+    tl.fromTo(
+      "#wk-z4-in",
+      { opacity: 0, scale: 0.3, rotation: -8 },
+      { opacity: 1, scale: 1, rotation: -2, duration: 0.6, ease: "back.out(2.2)" },
+      1.8,
+    );
+
+    tl.fromTo("#wk-wipe-aus", { xPercent: -100 }, { xPercent: 0, duration: 0.45, ease: "power3.in" }, 3.55);
+    window.__timelines["willkommen"] = tl;
+  </script>
+</template>

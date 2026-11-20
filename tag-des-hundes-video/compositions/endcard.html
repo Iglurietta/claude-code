@@ -1,0 +1,130 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    #end-logo {
+      position: absolute;
+      left: 560px;
+      top: 150px;
+      width: 800px;
+      height: 119px;
+    }
+    #end-logo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #end-tag {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 330px;
+      text-align: center;
+    }
+    #end-tag-in {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 700;
+      font-size: 56px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #57352c;
+    }
+    #end-datum {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 400px;
+      text-align: center;
+    }
+    #end-datum-in {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      font-size: 210px;
+      line-height: 1;
+      color: #57352c;
+      letter-spacing: -0.01em;
+    }
+    #end-band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 660px;
+      text-align: center;
+    }
+    #end-band-in {
+      display: inline-block;
+      background: #e21c21;
+      color: #ffffff;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 54px;
+      padding: 16px 40px 20px;
+      box-shadow: 0 10px 0 rgba(87, 53, 44, 0.18);
+    }
+    #end-url {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 850px;
+      text-align: center;
+    }
+    #end-url-in {
+      display: inline-block;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 700;
+      font-size: 56px;
+      color: #e21c21;
+    }
+    #end-wipe-ein {
+      position: absolute;
+      inset: 0;
+      background: #e21c21;
+    }
+  </style>
+  <div id="root" data-composition-id="endcard" data-width="1920" data-height="1080">
+    <div id="end-logo" class="clip" data-start="0" data-duration="5">
+      <img id="end-logo-img" src="assets/logo.svg" alt="Tag des Hundes" />
+    </div>
+    <div id="end-tag" class="clip" data-start="0" data-duration="5"><span id="end-tag-in">Samstag</span></div>
+    <div id="end-datum" class="clip" data-start="0" data-duration="5"><span id="end-datum-in">8. Mai 2027</span></div>
+    <div id="end-band" class="clip" data-start="0" data-duration="5">
+      <span id="end-band-in">Jetzt reservieren – auch Ihr Hund wird sich freuen!</span>
+    </div>
+    <div id="end-url" class="clip" data-start="0" data-duration="5"><span id="end-url-in">www.tag-des-hundes.ch</span></div>
+    <div id="end-wipe-ein" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#end-wipe-ein", { xPercent: 0 }, { xPercent: 100, duration: 0.5, ease: "power3.out" }, 0);
+
+    tl.fromTo(
+      "#end-logo-img",
+      { clipPath: "inset(0% 50% 0% 50%)", y: 20 },
+      { clipPath: "inset(0% 0% 0% 0%)", y: 0, duration: 0.7, ease: "power3.out" },
+      0.35,
+    );
+    tl.fromTo("#end-tag-in", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.8);
+    tl.fromTo(
+      "#end-datum-in",
+      { opacity: 0, scale: 1.6 },
+      { opacity: 1, scale: 1, duration: 0.55, ease: "back.out(1.6)" },
+      0.95,
+    );
+    tl.fromTo(
+      "#end-band-in",
+      { clipPath: "inset(0% 100% 0% 0%)", rotation: -2.5 },
+      { clipPath: "inset(0% 0% 0% 0%)", rotation: -2.5, duration: 0.5, ease: "power3.out" },
+      1.55,
+    );
+    tl.fromTo("#end-url-in", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 2.1);
+    // sanfter Puls auf dem Aufruf, dann Halten bis zum Schluss
+    tl.fromTo("#end-band-in", { scale: 1 }, { scale: 1.04, duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut", immediateRender: false }, 2.9);
+    window.__timelines["endcard"] = tl;
+  </script>
+</template>

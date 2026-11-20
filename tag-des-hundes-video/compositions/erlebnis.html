@@ -1,0 +1,143 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    #erl-blase {
+      position: absolute;
+      left: 110px;
+      top: 170px;
+      width: 740px;
+      height: 740px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 22px solid #5f9de5;
+      overflow: hidden;
+    }
+    #erl-hund {
+      position: absolute;
+      left: 100px;
+      top: 40px;
+      width: 496px;
+      height: 617px;
+    }
+    #erl-hund img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #erl-titel {
+      position: absolute;
+      left: 900px;
+      top: 200px;
+      width: 900px;
+    }
+    #erl-titel-in {
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 66px;
+      line-height: 1.08;
+      color: #57352c;
+    }
+    .erl-band {
+      position: absolute;
+      left: 900px;
+    }
+    .erl-band span {
+      display: inline-block;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 50px;
+      padding: 16px 34px 18px;
+      box-shadow: 0 10px 0 rgba(87, 53, 44, 0.15);
+    }
+    #erl-b1 {
+      top: 470px;
+    }
+    #erl-b1 span {
+      background: #e21c21;
+      color: #ffffff;
+    }
+    #erl-b2 {
+      top: 625px;
+    }
+    #erl-b2 span {
+      background: #5f9de5;
+      color: #ffffff;
+    }
+    #erl-b3 {
+      top: 780px;
+    }
+    #erl-b3 span {
+      background: #fbc84a;
+      color: #57352c;
+    }
+    #erl-wipe-ein,
+    #erl-wipe-aus {
+      position: absolute;
+      inset: 0;
+      background: #e21c21;
+    }
+  </style>
+  <div id="root" data-composition-id="erlebnis" data-width="1920" data-height="1080">
+    <div id="erl-blase" data-layout-allow-overflow>
+      <div id="erl-hund" class="clip" data-start="0" data-duration="6">
+        <img id="erl-hund-img" src="assets/hund-sitzend.jpg" alt="Junger Jack Russell sitzt und hechelt" />
+      </div>
+    </div>
+    <div id="erl-titel" class="clip" data-start="0" data-duration="6">
+      <p id="erl-titel-in">Hundevereine aus der ganzen Schweiz laden ein:</p>
+    </div>
+    <div id="erl-b1" class="erl-band clip" data-start="0" data-duration="6">
+      <span id="erl-b1-in">Wissenswertes rund um den Hund</span>
+    </div>
+    <div id="erl-b2" class="erl-band clip" data-start="0" data-duration="6">
+      <span id="erl-b2-in">Nette Zwei- und Vierbeiner treffen</span>
+    </div>
+    <div id="erl-b3" class="erl-band clip" data-start="0" data-duration="6">
+      <span id="erl-b3-in">Bunte Aktivitäten &amp; viel Spass</span>
+    </div>
+    <div id="erl-wipe-ein" data-layout-ignore></div>
+    <div id="erl-wipe-aus" data-layout-ignore></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#erl-wipe-ein", { xPercent: 0 }, { xPercent: 100, duration: 0.5, ease: "power3.out" }, 0);
+
+    tl.fromTo("#erl-blase", { scale: 0 }, { scale: 1, duration: 0.7, ease: "back.out(1.4)" }, 0.2);
+    tl.fromTo(
+      "#erl-hund-img",
+      { y: 120, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "back.out(1.4)" },
+      0.4,
+    );
+    // kleines "Kopfneigen" des Hundes
+    tl.fromTo(
+      "#erl-hund-img",
+      { rotation: 0, transformOrigin: "50% 100%" },
+      { rotation: -4, duration: 0.5, yoyo: true, repeat: 3, ease: "sine.inOut" },
+      1.6,
+    );
+
+    tl.fromTo("#erl-titel-in", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.6);
+
+    [
+      ["#erl-b1-in", -2.5, 1.5],
+      ["#erl-b2-in", 1.8, 2.3],
+      ["#erl-b3-in", -1.5, 3.1],
+    ].forEach(([id, rot, t]) => {
+      tl.fromTo(
+        id,
+        { xPercent: 120, opacity: 0, rotation: rot * 4 },
+        { xPercent: 0, opacity: 1, rotation: rot, duration: 0.55, ease: "back.out(1.8)" },
+        t,
+      );
+    });
+
+    tl.fromTo("#erl-wipe-aus", { xPercent: -100 }, { xPercent: 0, duration: 0.45, ease: "power3.in" }, 5.5);
+    window.__timelines["erlebnis"] = tl;
+  </script>
+</template>
