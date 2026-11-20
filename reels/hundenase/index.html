@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Die Superkraft Hundenase</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@600;800&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --mustard: #e3a82b;
+        --ink: #14213d;
+        --cream: #fff6e5;
+        --coral: #f2545b;
+        --font-display: "Archivo Black", "Arial Black", sans-serif;
+        --font-body: "Inter", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        font-family: var(--font-body);
+      }
+      .scene {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1080px;
+        height: 1920px;
+      }
+      /* Scene transitions: an accent layer leads, the incoming scene's ground follows. */
+      .tx {
+        position: absolute;
+        z-index: 50;
+        pointer-events: none;
+      }
+      .tx-circle {
+        width: 3200px;
+        height: 3200px;
+        border-radius: 50%;
+        transform: scale(0);
+      }
+      .tx-wipe-x {
+        top: -40px;
+        left: -260px;
+        width: 1600px;
+        height: 2000px;
+        transform: translateX(1800px) skewX(-10deg);
+      }
+      .tx-wipe-y {
+        left: -40px;
+        top: -200px;
+        width: 1160px;
+        height: 2320px;
+        transform: translateY(2400px) skewY(-6deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="33"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Szenen laut Skript-Tabelle -->
+      <div
+        id="scene-1"
+        class="scene"
+        data-composition-id="s1-hook"
+        data-composition-src="compositions/s1-hook.html"
+        data-start="0"
+        data-duration="2.5"
+        data-track-index="1"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+      <div
+        id="scene-2"
+        class="scene"
+        data-composition-id="s2-riechzellen"
+        data-composition-src="compositions/s2-riechzellen.html"
+        data-start="2.5"
+        data-duration="5"
+        data-track-index="1"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <!-- Übergänge (über allen Szenen) -->
+      <div id="t1a" class="tx tx-circle" style="left: -1060px; top: -1100px; background: #e3a82b"></div>
+      <div id="t1b" class="tx tx-circle" style="left: -1060px; top: -1100px; background: #14213d"></div>
+      <div id="t2a" class="tx tx-wipe-x" style="background: #e3a82b"></div>
+      <div id="t2b" class="tx tx-wipe-x" style="background: #14213d"></div>
+
+      <!-- Audio-Platzhalter: Dateien später gleichnamig ersetzen -->
+      <audio
+        id="voiceover"
+        src="assets/audio/voiceover.mp3"
+        data-start="0"
+        data-duration="33"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+      <audio
+        id="music"
+        src="assets/audio/music.mp3"
+        data-start="0"
+        data-duration="33"
+        data-track-index="11"
+        data-volume="0.35"
+        data-fade-out="1.5"
+      ></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const D = 0.45; // Dauer je Layer
+
+      // Kreis-Zoom: Akzentkreis, dann Grund der neuen Szene, endet exakt auf dem Schnitt b.
+      function circleZoom(a, b, cut) {
+        tl.fromTo(a, { scale: 0 }, { scale: 1, duration: D, ease: "expo.inOut" }, cut - D - 0.12);
+        tl.fromTo(b, { scale: 0 }, { scale: 1, duration: D, ease: "expo.inOut" }, cut - D);
+        tl.set([a, b], { autoAlpha: 0 }, cut);
+      }
+      // Masken-Wipe horizontal (von rechts nach links).
+      function wipeX(a, b, cut) {
+        tl.fromTo(a, { x: 1800 }, { x: 0, duration: D, ease: "expo.inOut" }, cut - D - 0.1);
+        tl.fromTo(b, { x: 1800 }, { x: 0, duration: D, ease: "expo.inOut" }, cut - D);
+        tl.set([a, b], { autoAlpha: 0 }, cut);
+      }
+      // Masken-Wipe vertikal (von unten nach oben).
+      function wipeY(a, b, cut) {
+        tl.fromTo(a, { y: 2400 }, { y: 0, duration: D, ease: "expo.inOut" }, cut - D - 0.1);
+        tl.fromTo(b, { y: 2400 }, { y: 0, duration: D, ease: "expo.inOut" }, cut - D);
+        tl.set([a, b], { autoAlpha: 0 }, cut);
+      }
+
+      circleZoom("#t1a", "#t1b", 2.5); // Szene 1 -> 2, Zoom aus der Nase
+      wipeX("#t2a", "#t2b", 7.5); // Szene 2 -> 3
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<template id="s1-hook-template">
+  <div data-composition-id="s1-hook" data-width="1080" data-height="1920" data-duration="2.5">
+    <div class="stage">
+      <!-- Duftbögen links/rechts der Nase -->
+      <svg class="sniff" viewBox="0 0 1080 1920" width="1080" height="1920">
+        <path class="arc arc-l1" d="M 300 420 Q 250 500 300 580" />
+        <path class="arc arc-l2" d="M 250 380 Q 180 500 250 620" />
+        <path class="arc arc-r1" d="M 780 420 Q 830 500 780 580" />
+        <path class="arc arc-r2" d="M 830 380 Q 900 500 830 620" />
+      </svg>
+
+      <!-- Hauptmotiv: stilisierte Hundenase -->
+      <div class="nose-wrap">
+        <svg class="nose" viewBox="0 0 200 150" width="380" height="285">
+          <path
+            d="M 22 18 Q 100 -6 178 18 Q 202 30 186 56 L 116 136 Q 100 152 84 136 L 14 56 Q -2 30 22 18 Z"
+            fill="#E3A82B"
+          />
+          <ellipse cx="64" cy="60" rx="24" ry="14" transform="rotate(22 64 60)" fill="#14213D" />
+          <ellipse cx="136" cy="60" rx="24" ry="14" transform="rotate(-22 136 60)" fill="#14213D" />
+          <ellipse cx="72" cy="28" rx="20" ry="7" fill="#FFF6E5" opacity="0.55" />
+        </svg>
+      </div>
+
+      <div class="headline">
+        <div class="line"><span class="w">DEIN</span> <span class="w">HUND</span></div>
+        <div class="line"><span class="w">RIECHT,</span></div>
+        <div class="line"><span class="w hl">WANN</span> <span class="w">DU</span></div>
+        <div class="line"><span class="w">KOMMST</span></div>
+      </div>
+    </div>
+
+    <style>
+      [data-composition-id="s1-hook"] .stage {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        background: #000;
+        overflow: hidden;
+      }
+      [data-composition-id="s1-hook"] .sniff {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      [data-composition-id="s1-hook"] .arc {
+        fill: none;
+        stroke: #fff6e5;
+        stroke-width: 12;
+        stroke-linecap: round;
+        opacity: 0;
+      }
+      [data-composition-id="s1-hook"] .nose-wrap {
+        position: absolute;
+        left: 350px;
+        top: 360px;
+        width: 380px;
+        height: 285px;
+      }
+      [data-composition-id="s1-hook"] .nose {
+        display: block;
+        transform: scale(0);
+        transform-origin: 50% 40%;
+      }
+      [data-composition-id="s1-hook"] .headline {
+        position: absolute;
+        left: 60px;
+        right: 60px;
+        top: 790px;
+        text-align: center;
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 140px;
+        line-height: 1;
+        color: #fff6e5;
+      }
+      [data-composition-id="s1-hook"] .line {
+        height: 140px;
+        margin-bottom: 4px;
+        white-space: nowrap;
+      }
+      [data-composition-id="s1-hook"] .w {
+        display: inline-block;
+        opacity: 0;
+      }
+      [data-composition-id="s1-hook"] .hl {
+        color: #f2545b;
+      }
+    </style>
+
+    <script>
+      (function () {
+        const S = '[data-composition-id="s1-hook"] ';
+        const q = (sel) => document.querySelector(S + sel);
+        const qa = (sel) => document.querySelectorAll(S + sel);
+        const tl = gsap.timeline({ paused: true });
+
+        // Nase poppt mittig auf
+        tl.fromTo(q(".nose"), { scale: 0, rotation: -12 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.2)" }, 0.05);
+
+        // Zuckt zweimal (Schnüffeln), Duftbögen pulsen mit
+        [0.55, 0.85].forEach((t) => {
+          tl.to(q(".nose"), { scaleY: 0.86, scaleX: 1.07, y: -10, duration: 0.07, ease: "power2.out" }, t);
+          tl.to(q(".nose"), { scaleY: 1, scaleX: 1, y: 0, duration: 0.18, ease: "back.out(3)" }, t + 0.07);
+          tl.fromTo(qa(".arc-l1, .arc-r1"), { opacity: 0, scale: 0.8, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.12, ease: "power2.out" }, t);
+          tl.to(qa(".arc-l1, .arc-r1"), { opacity: 0, duration: 0.2 }, t + 0.14);
+          tl.fromTo(qa(".arc-l2, .arc-r2"), { opacity: 0, scale: 0.8, transformOrigin: "50% 50%" }, { opacity: 0.6, scale: 1, duration: 0.14, ease: "power2.out" }, t + 0.05);
+          tl.to(qa(".arc-l2, .arc-r2"), { opacity: 0, duration: 0.22 }, t + 0.2);
+        });
+
+        // Text knallt wortweise rein (Takt des Voiceovers)
+        const words = qa(".w");
+        const times = [0.3, 0.45, 0.68, 1.0, 1.2, 1.42];
+        words.forEach((w, i) => {
+          tl.fromTo(w, { opacity: 0, scale: 1.8, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.28, ease: "back.out(2)" }, times[i]);
+        });
+        // "WANN" bekommt einen Extra-Punch
+        tl.to(q(".hl"), { scale: 1.12, duration: 0.1, yoyo: true, repeat: 1, ease: "power2.out" }, 1.3);
+
+        // Nichts steht still: sanftes Atmen bis zum Übergang
+        tl.to(q(".nose-wrap"), { y: -14, duration: 1.2, ease: "sine.inOut" }, 1.1);
+        tl.fromTo(q(".headline"), { scale: 1 }, { scale: 1.04, duration: 1.1, ease: "sine.inOut" }, 1.4);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["s1-hook"] = tl;
+      })();
+    </script>
+  </div>
+</template>

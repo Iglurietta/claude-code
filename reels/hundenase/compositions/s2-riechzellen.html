@@ -1,0 +1,235 @@
+<template id="s2-riechzellen-template">
+  <div data-composition-id="s2-riechzellen" data-width="1080" data-height="1920" data-duration="5">
+    <div class="stage">
+      <div class="dots" data-layout-allow-overflow></div>
+
+      <div class="label"><span class="w">RIECHZELLEN</span></div>
+
+      <!-- Mensch: kleiner Kreis links -->
+      <div class="human" data-layout-allow-overflow data-layout-allow-safe-zone>
+        <div class="tag"><span class="w">DU</span></div>
+        <div class="small-circle">
+          <svg viewBox="0 0 100 100" width="170" height="170">
+            <circle cx="50" cy="34" r="17" fill="#14213D" />
+            <path d="M 18 92 Q 18 58 50 58 Q 82 58 82 92 Z" fill="#14213D" />
+          </svg>
+        </div>
+        <div class="count-small"><span class="n6">0</span> MIO</div>
+      </div>
+
+      <div class="vs" data-layout-allow-overflow data-layout-allow-occlusion data-layout-allow-safe-zone>VS.</div>
+
+      <!-- Hund: riesiger senfgelber Kreis -->
+      <div class="tag-dog"><span class="w">DEIN</span> <span class="w">HUND</span></div>
+      <svg class="ring" viewBox="0 0 920 920" width="920" height="920">
+        <circle cx="460" cy="460" r="452" fill="none" stroke="#FFF6E5" stroke-width="6" stroke-dasharray="4 26" stroke-linecap="round" />
+      </svg>
+      <div class="big-circle"></div>
+      <div class="big-content">
+        <svg class="nose-mini" viewBox="0 0 200 150" width="150" height="112">
+          <path
+            d="M 22 18 Q 100 -6 178 18 Q 202 30 186 56 L 116 136 Q 100 152 84 136 L 14 56 Q -2 30 22 18 Z"
+            fill="#14213D"
+          />
+          <ellipse cx="64" cy="60" rx="24" ry="14" transform="rotate(22 64 60)" fill="#E3A82B" />
+          <ellipse cx="136" cy="60" rx="24" ry="14" transform="rotate(-22 136 60)" fill="#E3A82B" />
+        </svg>
+        <div class="bis">BIS ZU</div>
+        <div class="n300">0</div>
+        <div class="mio">MIO</div>
+      </div>
+    </div>
+
+    <style>
+      [data-composition-id="s2-riechzellen"] .stage {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        background: #14213d;
+        overflow: hidden;
+        color: #fff6e5;
+      }
+      [data-composition-id="s2-riechzellen"] .dots {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 2100px;
+        background-image: radial-gradient(circle, rgba(255, 246, 229, 0.12) 2.5px, transparent 3px);
+        background-size: 54px 54px;
+      }
+      [data-composition-id="s2-riechzellen"] .w {
+        display: inline-block;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .label {
+        position: absolute;
+        top: 290px;
+        left: 0;
+        width: 1080px;
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-weight: 800;
+        font-size: 56px;
+        letter-spacing: 0.14em;
+        color: #e3a82b;
+      }
+      [data-composition-id="s2-riechzellen"] .human {
+        position: absolute;
+        left: 90px;
+        top: 780px;
+        width: 440px;
+        text-align: center;
+      }
+      [data-composition-id="s2-riechzellen"] .tag,
+      [data-composition-id="s2-riechzellen"] .tag-dog {
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 56px;
+        color: #fff6e5;
+      }
+      [data-composition-id="s2-riechzellen"] .tag {
+        height: 80px;
+      }
+      [data-composition-id="s2-riechzellen"] .small-circle {
+        width: 300px;
+        height: 300px;
+        margin: 20px auto 0;
+        border-radius: 50%;
+        background: #fff6e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0);
+      }
+      [data-composition-id="s2-riechzellen"] .count-small {
+        margin-top: 36px;
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 120px;
+        line-height: 1;
+        white-space: nowrap;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .vs {
+        position: absolute;
+        left: 540px;
+        top: 1000px;
+        width: 220px;
+        text-align: center;
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 110px;
+        line-height: 1;
+        color: #f2545b;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .tag-dog {
+        position: absolute;
+        top: 560px;
+        left: 0;
+        width: 1080px;
+        text-align: center;
+      }
+      [data-composition-id="s2-riechzellen"] .ring {
+        position: absolute;
+        left: 80px;
+        top: 640px;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .big-circle {
+        position: absolute;
+        left: 130px;
+        top: 690px;
+        width: 820px;
+        height: 820px;
+        border-radius: 50%;
+        background: #e3a82b;
+        transform: scale(0);
+      }
+      [data-composition-id="s2-riechzellen"] .big-content {
+        position: absolute;
+        left: 130px;
+        top: 740px;
+        width: 820px;
+        text-align: center;
+        color: #14213d;
+      }
+      [data-composition-id="s2-riechzellen"] .nose-mini {
+        display: block;
+        margin: 0 auto;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .bis {
+        margin-top: 14px;
+        font-family: "Inter", sans-serif;
+        font-weight: 800;
+        font-size: 52px;
+        letter-spacing: 0.1em;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .n300 {
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 300px;
+        line-height: 1;
+        margin-top: 4px;
+        opacity: 0;
+      }
+      [data-composition-id="s2-riechzellen"] .mio {
+        font-family: "Archivo Black", "Arial Black", sans-serif;
+        font-size: 120px;
+        line-height: 1;
+        opacity: 0;
+      }
+    </style>
+
+    <script>
+      (function () {
+        const S = '[data-composition-id="s2-riechzellen"] ';
+        const q = (sel) => document.querySelector(S + sel);
+        const qa = (sel) => document.querySelectorAll(S + sel);
+        const tl = gsap.timeline({ paused: true });
+        const pop = { ease: "back.out(2)", duration: 0.35 };
+
+        // Hintergrund-Punktraster driftet die ganze Szene
+        tl.fromTo(q(".dots"), { y: 0 }, { y: -108, duration: 5, ease: "none" }, 0);
+
+        // "Du hast rund 6 Millionen Riechzellen."
+        tl.fromTo(q(".label .w"), { opacity: 0, y: 40 }, { opacity: 1, y: 0, ...pop }, 0.1);
+        tl.fromTo(q(".tag .w"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...pop }, 0.25);
+        tl.fromTo(q(".small-circle"), { scale: 0 }, { scale: 1, ...pop, duration: 0.45 }, 0.3);
+        tl.fromTo(q(".count-small"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...pop }, 0.5);
+        const c6 = { v: 0 };
+        tl.to(c6, { v: 6, duration: 0.8, ease: "power2.out", onUpdate: () => (q(".n6").textContent = Math.round(c6.v)) }, 0.55);
+        tl.to(q(".small-circle"), { y: -10, duration: 0.6, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0.9);
+
+        // "Dein Hund?"
+        tl.fromTo(q(".vs"), { opacity: 0, scale: 2.2, rotation: -10 }, { opacity: 1, scale: 1, rotation: 0, ...pop }, 1.65);
+        qa(".tag-dog .w").forEach((w, i) => {
+          tl.fromTo(w, { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...pop }, 1.9 + i * 0.14);
+        });
+
+        // Riesiger senfgelber Kreis füllt sich von rechts ...
+        tl.fromTo(q(".big-circle"), { scale: 0, x: 300, y: -40 }, { scale: 0.42, x: 300, y: -40, duration: 0.4, ease: "back.out(2)" }, 2.05);
+        // ... wächst und drückt den kleinen Kreis aus dem Bild
+        tl.to(q(".big-circle"), { scale: 1, x: 0, y: 0, duration: 0.7, ease: "expo.inOut" }, 2.4);
+        tl.to([q(".human"), q(".vs")], { x: -760, rotation: -14, duration: 0.6, ease: "expo.in" }, 2.45);
+
+        // "Bis zu 300 Millionen." – Zähler rast hoch
+        tl.fromTo(q(".nose-mini"), { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, ...pop }, 2.85);
+        tl.fromTo(q(".bis"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, ...pop }, 2.95);
+        tl.fromTo(q(".n300"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, ...pop }, 3.0);
+        const c300 = { v: 0 };
+        tl.to(c300, { v: 300, duration: 0.9, ease: "expo.out", onUpdate: () => (q(".n300").textContent = Math.round(c300.v)) }, 3.0);
+        tl.fromTo(q(".mio"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ...pop }, 3.5);
+        tl.to(q(".n300"), { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, 3.9);
+
+        // Haltebewegung: gestrichelter Ring dreht, Nase schnüffelt
+        tl.fromTo(q(".ring"), { opacity: 0, scale: 0.9, rotation: 0 }, { opacity: 0.7, scale: 1, rotation: 30, duration: 2.1, ease: "power1.out" }, 2.9);
+        tl.to(q(".nose-mini"), { scaleY: 0.85, duration: 0.08, yoyo: true, repeat: 3, ease: "power2.inOut" }, 3.6);
+
+        window.__timelines = window.__timelines || {};
+        window.__timelines["s2-riechzellen"] = tl;
+      })();
+    </script>
+  </div>
+</template>
