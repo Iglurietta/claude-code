@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Hunde-Körpersprache Reel</title>
+<style>
+  :root{
+    --bg:#F6EFE4; --ink:#1F2A44; --muted:#5B6478;
+    --tan:#E2A766; --tan-d:#C4874A; --cream:#FFF3E2;
+    --red:#E5574F; --green:#3FAE76; --yellow:#F0B429; --blue:#4C7BE0; --pink:#F28BA8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#111}
+  #stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg);
+    font-family:'Inter','Inter Display',system-ui,sans-serif;color:var(--ink)}
+  svg#art{position:absolute;inset:0}
+  .layer{position:absolute;left:0;right:0;text-align:center;opacity:0;will-change:transform,opacity}
+  .kicker{font-size:40px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .h1{font-family:'Inter Display','Inter',sans-serif;font-size:118px;line-height:1.02;font-weight:800;letter-spacing:-.03em}
+  .h2{font-family:'Inter Display','Inter',sans-serif;font-size:88px;line-height:1.05;font-weight:800;letter-spacing:-.025em}
+  .chip{display:inline-flex;align-items:center;gap:18px;padding:16px 34px;border-radius:999px;
+    background:var(--ink);color:#fff;font-size:40px;font-weight:700;letter-spacing:.02em}
+  .chip b{color:var(--yellow)}
+  .card{margin:0 70px;padding:40px 48px;border-radius:44px;background:#fff;
+    box-shadow:0 18px 50px rgba(31,42,68,.12);text-align:left;font-size:48px;line-height:1.25;font-weight:600}
+  .card .lab{display:flex;align-items:center;gap:22px;font-size:54px;font-weight:800;margin-bottom:10px}
+  .dot{width:34px;height:34px;border-radius:50%;flex:none}
+  .card p{color:var(--muted);font-weight:500;font-size:44px}
+  .hl{background:linear-gradient(transparent 58%, rgba(240,180,41,.55) 58%);padding:0 6px}
+  .word{display:inline-block;opacity:0}
+  .bubble{position:absolute;padding:26px 40px;border-radius:40px;background:var(--ink);color:#fff;
+    font-size:54px;font-weight:800;opacity:0;white-space:nowrap}
+  .bubble:after{content:"";position:absolute;left:60px;bottom:-26px;border:16px solid transparent;
+    border-top:22px solid var(--ink);border-bottom:0}
+  #progress{position:absolute;top:120px;left:0;right:0;display:flex;justify-content:center;gap:16px;opacity:0}
+  #progress i{display:block;width:90px;height:12px;border-radius:6px;background:rgba(31,42,68,.15);overflow:hidden}
+  #progress i span{display:block;height:100%;width:0;background:var(--ink)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="art" viewBox="0 0 1080 1920" width="1080" height="1920">
+    <defs>
+      <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="2" fill="#1F2A44" opacity=".07"/>
+      </pattern>
+    </defs>
+    <rect width="1080" height="1920" fill="url(#dots)"/>
+    <circle id="blob" cx="540" cy="1120" r="430" fill="#F0B429" opacity=".22"/>
+    <circle id="ring" cx="540" cy="1120" r="470" fill="none" stroke="#1F2A44" stroke-width="4" stroke-dasharray="4 18" stroke-linecap="round" opacity=".25"/>
+
+    <!-- DOG -->
+    <g id="cam">
+      <ellipse id="shadow" cx="0" cy="182" rx="230" ry="20" fill="#1F2A44" opacity=".12"/>
+      <g id="dog">
+        <!-- tail -->
+        <g id="tail"><path d="M0 0 C -45 0 -85 -10 -125 -32" fill="none" stroke="#E2A766" stroke-width="26" stroke-linecap="round"/>
+          <path d="M-105 -24 C -112 -27 -118 -29 -125 -32" fill="none" stroke="#FFF3E2" stroke-width="26" stroke-linecap="round"/></g>
+        <!-- far back leg -->
+        <g class="leg"><rect x="-92" y="10" width="36" height="165" rx="18" fill="#C4874A"/></g>
+        <!-- near back leg -->
+        <g class="leg"><rect x="-140" y="10" width="40" height="165" rx="20" fill="#E2A766"/><rect x="-142" y="160" width="48" height="18" rx="9" fill="#FFF3E2"/></g>
+        <!-- far front leg -->
+          <g class="fleg"><rect x="118" y="10" width="36" height="165" rx="18" fill="#C4874A"/></g>
+        <g id="front">
+          <!-- body -->
+          <rect id="body" x="-180" y="-95" width="355" height="150" rx="75" fill="#E2A766"/>
+          <ellipse cx="135" cy="-5" rx="52" ry="58" fill="#FFF3E2"/>
+          <!-- head -->
+          <g id="head">
+            <g id="earFar"><path d="M-24 10 Q -20 -60 0 -98 Q 22 -58 26 10 Z" fill="#B07436"/></g>
+            <circle cx="60" cy="-70" r="80" fill="#E2A766"/>
+            <!-- mouth interior + jaw -->
+            <ellipse id="mouthIn" cx="128" cy="-30" rx="46" ry="0" fill="#7A2B35"/>
+            <g id="jaw"><ellipse cx="128" cy="-22" rx="46" ry="15" fill="#FFF3E2"/></g>
+            <ellipse cx="132" cy="-52" rx="62" ry="40" fill="#FFF3E2"/>
+            <path id="mouthLine" d="M162 -26 Q 140 -14 110 -26" fill="none" stroke="#1F2A44" stroke-width="6" stroke-linecap="round"/>
+            <g id="tongue"><rect x="-13" y="-34" width="26" height="40" rx="13" fill="#F28BA8"/><line x1="0" y1="-24" x2="0" y2="0" stroke="#D8638A" stroke-width="3" stroke-linecap="round"/></g>
+            <ellipse cx="186" cy="-64" rx="18" ry="14" fill="#1F2A44"/>
+            <ellipse cx="181" cy="-69" rx="6" ry="4" fill="#fff" opacity=".6"/>
+            <!-- eye -->
+            <g id="eye" transform="translate(80 -92)">
+              <ellipse id="eyeWhite" cx="0" cy="0" rx="20" ry="15" fill="#fff" opacity="0"/>
+              <circle id="pupil" cx="0" cy="0" r="11" fill="#1F2A44"/>
+              <circle id="glint" cx="3" cy="-4" r="3.5" fill="#fff"/>
+            </g>
+            <path id="brow" d="M62 -120 Q 80 -128 98 -120" fill="none" stroke="#B07436" stroke-width="7" stroke-linecap="round"/>
+            <g id="ear"><path d="M-26 10 Q -21 -62 0 -102 Q 23 -60 28 10 Z" fill="#C4874A"/><path d="M-12 4 Q -9 -45 0 -72 Q 11 -44 14 4 Z" fill="#F2C9A0"/></g>
+          </g>
+        </g>
+        <!-- near front leg -->
+          <g class="fleg"><rect x="80" y="10" width="40" height="165" rx="20" fill="#E2A766"/><rect x="78" y="160" width="50" height="18" rx="9" fill="#FFF3E2"/></g>
+      </g>
+      <!-- stress marks / sparkles -->
+      <g id="fx"></g>
+    </g>
+  </svg>
+
+  <!-- progress -->
+  <div id="progress"><i><span></span></i><i><span></span></i><i><span></span></i><i><span></span></i><i><span></span></i></div>
+
+  <!-- S0 hook -->
+  <div class="layer" id="s0k" style="top:300px"><span class="kicker">Hunde-Körpersprache</span></div>
+  <div class="layer" id="s0t" style="top:380px"><div class="h1"><span class="word">Was</span> <span class="word">sagt</span> <span class="word">dein</span><br><span class="word">Hund</span> <span class="word hl">dir</span> <span class="word hl">gerade?</span></div></div>
+
+  <!-- S1 intro -->
+  <div class="layer" id="s1t" style="top:360px"><div class="h1"><span style="color:#E5574F">5 Signale,</span><br>die du kennen<br>solltest</div></div>
+
+  <!-- S2 Rute -->
+  <div class="layer chipL" id="s2c" style="top:220px"><span class="chip"><b>01</b> Die Rute</span></div>
+  <div class="layer" id="s2t" style="top:330px"><div class="h2">Wedeln heisst nicht<br>immer <span class="hl">Freude</span></div></div>
+  <div class="layer" id="s2a" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--red)"></i>Hoch &amp; steif</div><p>Angespannt, erregt – evtl. Drohung</p></div></div>
+  <div class="layer" id="s2b" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--green)"></i>Locker auf Rückenhöhe</div><p>Entspannt und freundlich</p></div></div>
+  <div class="layer" id="s2d" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--yellow)"></i>Eingeklemmt</div><p>Angst oder Unsicherheit</p></div></div>
+
+  <!-- S3 Ohren -->
+  <div class="layer" id="s3c" style="top:220px"><span class="chip"><b>02</b> Die Ohren</span></div>
+  <div class="layer" id="s3t" style="top:330px"><div class="h2">Die Ohren zeigen,<br>wo der <span class="hl">Fokus</span> ist</div></div>
+  <div class="layer" id="s3a" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--blue)"></i>Nach vorne gerichtet</div><p>Aufmerksam und interessiert</p></div></div>
+  <div class="layer" id="s3b" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--yellow)"></i>Flach angelegt</div><p>Unsicher, ängstlich oder beschwichtigend</p></div></div>
+
+  <!-- S4 Gähnen -->
+  <div class="layer" id="s4c" style="top:220px"><span class="chip"><b>03</b> Gähnen &amp; Lecken</span></div>
+  <div class="layer" id="s4t" style="top:330px"><div class="h2">Nicht müde –<br>sondern <span class="hl">gestresst</span></div></div>
+  <div class="layer" id="s4a" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--yellow)"></i>Beschwichtigungssignal</div><p>Der Hund will die Situation entspannen: «Mir wird’s gerade zu viel.»</p></div></div>
+  <div class="bubble" id="s4y" style="left:610px;top:640px">Gähnen</div>
+  <div class="bubble" id="s4l" style="left:560px;top:640px">Nase lecken</div>
+
+  <!-- S5 Spielverbeugung -->
+  <div class="layer" id="s5c" style="top:220px"><span class="chip"><b>04</b> Spielverbeugung</span></div>
+  <div class="layer" id="s5t" style="top:330px"><div class="h2">Vorne runter,<br><span class="hl">Po hoch</span></div></div>
+  <div class="layer" id="s5a" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--green)"></i>Spielaufforderung</div><p>Eine freundliche Einladung – meist mit lockerer, wedelnder Rute.</p></div></div>
+  <div class="bubble" id="s5b" style="left:430px;top:700px">Lass uns spielen!</div>
+
+  <!-- S6 Walauge -->
+  <div class="layer" id="s6c" style="top:220px"><span class="chip"><b>05</b> Das Walauge</span></div>
+  <div class="layer" id="s6t" style="top:330px"><div class="h2">Wenn du das <span class="hl">Weisse</span><br>im Auge siehst</div></div>
+  <div class="layer" id="s6a" style="top:1440px"><div class="card"><div class="lab"><i class="dot" style="background:var(--red)"></i>Unwohlsein</div><p>Kopf abgewandt, Blick bleibt am Reiz. <b style="color:var(--ink)">Gib ihm Abstand.</b></p></div></div>
+
+  <!-- S7 Outro -->
+  <div class="layer" id="s7t" style="top:330px"><div class="h1">Lies immer den<br><span class="hl">ganzen</span> Hund.</div></div>
+  <div class="layer" id="s7s" style="top:1440px"><div class="card" style="text-align:center"><p style="font-size:46px">Ein Signal allein sagt wenig –<br><b style="color:var(--ink)">der Kontext zählt.</b></p></div></div>
+  <div class="layer" id="s7cta" style="top:1690px"><span class="chip" style="background:var(--red)">Speichern &amp; teilen</span></div>
+</div>
+
+<script>
+const DUR = 37.5, FPS = 30;
+const $ = id => document.getElementById(id);
+const clamp = (v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const lerp = (a,b,p)=>a+(b-a)*p;
+const easeInOut = p => p<.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2;
+const easeOut = p => 1-Math.pow(1-p,3);
+const backOut = p => { const c1=1.70158,c3=c1+1; return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2); };
+const prog = (t,a,b)=>clamp((t-a)/(b-a));
+
+// ---------- text layers: [id, in, out] ----------
+const LAYERS = [
+  ['s0k',0.3,3.4],['s0t',0.0,3.4],
+  ['s1t',3.7,6.3],
+  ['s2c',6.5,12.3],['s2t',6.6,12.3],['s2a',7.3,9.0],['s2b',9.2,10.9],['s2d',11.1,12.3],
+  ['s3c',12.5,17.1],['s3t',12.6,17.1],['s3a',13.3,15.0],['s3b',15.2,17.1],
+  ['s4c',17.3,22.3],['s4t',17.4,22.3],['s4a',18.0,22.3],
+  ['s5c',22.5,27.1],['s5t',22.6,27.1],['s5a',23.4,27.1],
+  ['s6c',27.3,32.3],['s6t',27.4,32.3],['s6a',28.4,32.3],
+  ['s7t',32.5,DUR+1],['s7s',33.3,DUR+1],['s7cta',34.2,DUR+1],
+];
+function layer(el,t,a,b){
+  const pin = prog(t,a,a+.45), pout = prog(t,b-.35,b);
+  const o = Math.min(easeOut(pin), 1-pout);
+  el.style.opacity = o;
+  const y = (1-backOut(pin))*70 - easeInOut(pout)*40;
+  const s = .96 + .04*easeOut(pin);
+  el.style.transform = `translateY(${y}px) scale(${s})`;
+  el.style.visibility = o<=0.001 ? 'hidden':'visible';
+}
+function bubble(el,t,a,b){
+  const pin=prog(t,a,a+.3), pout=prog(t,b-.25,b);
+  const o=Math.min(pin,1-pout);
+  el.style.opacity=o;
+  el.style.transform=`scale(${backOut(pin)*(1-.2*pout)})`;
+  el.style.transformOrigin='60px 120%';
+}
+
+// ---------- dog poses ----------
+const N = {tail:-12,wag:0,ear:-25,head:0,bow:0,white:0,mouth:0,tongue:0,crouch:0,dx:0,dy:0,s:1,away:0};
+const P = o => Object.assign({},N,o);
+const KF = [
+  [0.0, P({dx:-1100,wag:1})],
+  [0.9, P({wag:1})],
+  [3.3, P({wag:1,ear:-10,head:-4})],
+  [3.9, P({head:-6,ear:5})],
+  [6.3, P({})],
+  // Rute
+  [7.2, P({tail:52,wag:.3,ear:12,head:-6})], [8.9, P({tail:52,wag:.3,ear:12,head:-6})],
+  [9.3, P({tail:-8,wag:1.1,ear:-35,mouth:.25})], [10.8, P({tail:-8,wag:1.1,ear:-35,mouth:.25})],
+  [11.2, P({tail:-68,ear:-100,head:12,crouch:.45})], [12.2, P({tail:-68,ear:-100,head:12,crouch:.45})],
+  [12.8, P({})],
+  // Ohren (zoom on head)
+  [13.3, P({ear:16,head:-8,tail:18,s:1.25,dx:-170,dy:110})], [15.0, P({ear:16,head:-8,tail:18,s:1.25,dx:-170,dy:110})],
+  [15.4, P({ear:-102,head:10,tail:-35,crouch:.2,s:1.25,dx:-170,dy:110})], [17.0, P({ear:-102,head:10,tail:-35,crouch:.2,s:1.25,dx:-170,dy:110})],
+  [17.5, P({ear:-50})],
+  // Gähnen & Lecken
+  [18.0, P({ear:-55,head:-4})],
+  [18.5, P({ear:-60,head:-22,mouth:1})], [19.4, P({ear:-60,head:-22,mouth:1})],
+  [19.9, P({ear:-60,head:0,mouth:0})],
+  [20.2, P({ear:-60,tongue:0})],[20.45, P({ear:-60,tongue:1})],[20.75, P({ear:-60,tongue:0})],
+  [21.0, P({ear:-60,tongue:1})],[21.3, P({ear:-60,tongue:0})],
+  [22.3, P({})],
+  // Spielverbeugung
+  [23.1, P({bow:1,tail:40,wag:1.2,ear:-5,head:-14,mouth:.35})], [26.8, P({bow:1,tail:40,wag:1.2,ear:-5,head:-14,mouth:.35})],
+  [27.3, P({})],
+  // Walauge
+  [28.2, P({white:1,away:1,head:14,ear:-85,crouch:.2,tail:-45,s:1.45,dx:-250,dy:170})],
+  [32.0, P({white:1,away:1,head:14,ear:-85,crouch:.2,tail:-45,s:1.45,dx:-250,dy:170})],
+  [32.7, P({wag:1,ear:-20,mouth:.3})],
+  [DUR, P({wag:1,ear:-20,mouth:.3})],
+];
+function pose(t){
+  let i=0; while(i<KF.length-2 && t>KF[i+1][0]) i++;
+  const [ta,a]=KF[i], [tb,b]=KF[i+1];
+  const p = easeInOut(prog(t,ta,tb));
+  const r={}; for(const k in N) r[k]=lerp(a[k],b[k],p);
+  return r;
+}
+
+// scene accent colours for the background blob
+const BLOB = [[0,'#F0B429'],[6.4,'#E5574F'],[12.4,'#4C7BE0'],[17.2,'#F0B429'],[22.4,'#3FAE76'],[27.2,'#E5574F'],[32.4,'#F0B429']];
+function hex(c){return [1,3,5].map(i=>parseInt(c.substr(i,2),16))}
+function blobColor(t){
+  let i=0; while(i<BLOB.length-1 && t>=BLOB[i+1][0]) i++;
+  const prev = BLOB[Math.max(0,i-1)][1], cur = BLOB[i][1];
+  const p = easeInOut(prog(t,BLOB[i][0],BLOB[i][0]+.6));
+  const A=hex(prev),B=hex(cur);
+  return `rgb(${A.map((v,k)=>Math.round(lerp(v,B[k],p))).join(',')})`;
+}
+
+const words = [...document.querySelectorAll('#s0t .word')];
+const legs = [...document.querySelectorAll('.leg')], flegs=[...document.querySelectorAll('.fleg')];
+const bars = [...document.querySelectorAll('#progress span')];
+const SIG = [[6.4,12.4],[12.4,17.2],[17.2,22.4],[22.4,27.2],[27.2,32.4]];
+
+function render(t){
+  // text
+  for(const [id,a,b] of LAYERS) layer($(id),t,a,b);
+  words.forEach((w,i)=>{ const p=prog(t,.15+i*.14,.15+i*.14+.4);
+    w.style.opacity=p; w.style.transform=`translateY(${(1-backOut(p))*60}px)`; });
+  bubble($('s4y'),t,18.5,19.6); bubble($('s4l'),t,20.2,21.5); bubble($('s5b'),t,23.4,26.9);
+
+  // progress bar
+  const pv = Math.min(prog(t,6.0,6.5), 1-prog(t,32.2,32.6));
+  $('progress').style.opacity = pv;
+  bars.forEach((b,i)=> b.style.width = (prog(t,SIG[i][0],SIG[i][1])*100)+'%');
+
+  // background
+  const blob=$('blob'); blob.setAttribute('fill',blobColor(t));
+  const pulse = 1 + .025*Math.sin(t*2.2);
+  blob.setAttribute('r', 430*pulse * (.2+.8*easeOut(prog(t,0,.8))));
+  $('ring').setAttribute('transform',`rotate(${t*8} 540 1120)`);
+
+  // dog
+  const q = pose(t);
+  const bounce = q.bow * Math.abs(Math.sin(t*Math.PI*2.2))*-18;
+  $('cam').setAttribute('transform',`translate(${540+q.dx} ${1150+q.dy+bounce}) scale(${q.s})`);
+  $('shadow').setAttribute('rx', 230 - 30*q.bow);
+  const k = 1 - .28*q.crouch;
+  legs.forEach(l=>l.setAttribute('transform',`translate(0 175) scale(1 ${k}) translate(0 -175)`));
+  const fk = k * (1 - .4*q.bow);
+  flegs.forEach(l=>l.setAttribute('transform',`translate(0 175) scale(1 ${fk}) translate(0 -175)`));
+  const drop = 165*(1-k);
+  const breathe = 1 + .012*Math.sin(t*4);
+  $('dog').setAttribute('transform',`translate(0 0)`);
+  // front part (body+head) rotates down around hip for play bow
+  $('front').setAttribute('transform',`translate(0 ${drop}) rotate(${q.bow*17} -120 10) scale(1 ${breathe})`);
+  $('tail').setAttribute('transform',`translate(-168 ${-55+drop}) rotate(${q.tail + q.wag*16*Math.sin(t*Math.PI*2*2.6)})`);
+  $('head').setAttribute('transform',`translate(150 -80) rotate(${q.head})`);
+  $('ear').setAttribute('transform',`translate(42 -128) rotate(${q.ear})`);
+  $('earFar').setAttribute('transform',`translate(18 -135) rotate(${q.ear-8})`);
+  // mouth
+  $('jaw').setAttribute('transform',`rotate(${q.mouth*40} 92 -30)`);
+  $('mouthIn').setAttribute('ry', 44*q.mouth);
+  $('mouthIn').setAttribute('cy', -30 + 24*q.mouth);
+  $('mouthLine').style.opacity = 1-clamp(q.mouth*3);
+  const tg = $('tongue');
+  if(q.tongue>0.01){ // lick: tongue over the nose
+    tg.setAttribute('transform',`translate(${175-10*q.tongue} ${-36-8*q.tongue}) rotate(${-40+30*q.tongue}) scale(1 ${q.tongue})`);
+    tg.style.opacity=1;
+  } else if(q.mouth>0.15 && q.mouth<0.6){ // happy panting tongue
+    tg.setAttribute('transform',`translate(120 ${-8+4*Math.sin(t*14)}) rotate(180) scale(1 ${clamp((q.mouth-.15)*4)})`);
+    tg.style.opacity=1;
+  } else tg.style.opacity=0;
+  // eye
+  $('eyeWhite').setAttribute('opacity', q.white);
+  $('eyeWhite').setAttribute('rx', 14+10*q.white);
+  $('pupil').setAttribute('cx', 12*q.white); $('pupil').setAttribute('cy', -2*q.white);
+  $('glint').setAttribute('cx', 3+12*q.white);
+  const blink = (t%3.7)<.12 && q.white<.1 ? .1 : 1;
+  $('eye').setAttribute('transform',`translate(80 -92) scale(1 ${blink})`);
+  $('brow').setAttribute('transform',`translate(0 ${-6*q.white}) rotate(${-10*q.white} 80 -122)`);
+}
+window.render = render; window.DUR = DUR; window.FPS = FPS;
+
+// live preview when opened in a browser (not while rendering)
+if(!location.search.includes('render')){
+  const t0=performance.now();
+  (function loop(){ render(((performance.now()-t0)/1000)%DUR); requestAnimationFrame(loop); })();
+  const fit=()=>{const s=Math.min(innerWidth/1080,innerHeight/1920);
+    const st=$('stage'); st.style.transformOrigin='0 0'; st.style.transform=`scale(${s})`;
+    document.body.style.cssText=`width:${1080*s}px;height:${1920*s}px;margin:0 auto;overflow:hidden`;};
+  fit(); addEventListener('resize',fit);
+} else render(0);
+</script>
+</body>
+</html>
