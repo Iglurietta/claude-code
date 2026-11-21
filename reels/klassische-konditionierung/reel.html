@@ -2,52 +2,58 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>Klassische Konditionierung – Reel</title>
+<title>Klassische Konditionierung – Reel (HUND SCHWEIZ)</title>
 <style>
   :root{
-    --bg:#101935; --bg2:#1B2550; --ink:#FFFFFF; --muted:#AEB8E0;
-    --yellow:#FFC93C; --coral:#FF6B6B; --mint:#4ECDC4; --violet:#8B7CF6; --gray:#7C86A8;
+    /* HUND SCHWEIZ Designsystem */
+    --surface:#ffffff; --surface-soft:#fafafa; --ink:#3a3a3a; --muted:#54595f;
+    --gold:#d69900; --gold-text:#8f6600; --slate:#5a6886; --bronze:#b27d3d;
+    --sand:#eae4d7; --stone:#cdcbbc; --social-sand:#e6d8c3;
+    --plum:#754c6e; --plum-soft:#a0849c; --plum-tint:#d1c3cf;
+    --sage:#738561; --sage-soft:#9bae8d; --on-dark:#ffffff;
+    --bg:var(--surface-soft); --yellow:var(--gold);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
   body{font-family:'Inter','DejaVu Sans',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
   #stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
-  .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
-  #grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 2px,transparent 2px);background-size:54px 54px}
+  .band{position:absolute;left:-200px;width:1480px;height:520px;transform-origin:50% 50%}
+  #grid{display:none}
   .el{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity}
   .txt{width:960px;text-align:center;line-height:1.12;font-weight:800;letter-spacing:-.02em}
   .h-xl{font-size:118px}.h-l{font-size:92px}.h-m{font-size:72px}.h-s{font-size:52px}.p{font-size:44px;font-weight:600;color:var(--muted);letter-spacing:-.01em;line-height:1.3}
-  .y{color:var(--yellow)}.c{color:var(--coral)}.m{color:var(--mint)}
-  .hl{background-image:linear-gradient(transparent 58%,rgba(255,201,60,.45) 58%,rgba(255,201,60,.45) 92%,transparent 92%);background-repeat:no-repeat;background-size:0% 100%;padding:0 6px}
-  .chip{display:inline-block;padding:14px 30px;border-radius:999px;font-size:32px;font-weight:800;letter-spacing:.12em;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.18);color:var(--yellow);white-space:nowrap}
+  .y{color:var(--gold)}.c{color:var(--plum)}.m{color:var(--sage)}
+  .hl{background-image:linear-gradient(transparent 58%,rgba(214,153,0,.32) 58%,rgba(214,153,0,.32) 92%,transparent 92%);background-repeat:no-repeat;background-size:0% 100%;padding:0 6px}
+  .chip{display:inline-block;padding:14px 30px;border-radius:999px;font-size:32px;font-weight:800;letter-spacing:.12em;background:var(--sand);border:0;color:var(--gold-text);white-space:nowrap}
   .label{width:400px;text-align:center}
   .label b{display:block;font-size:48px;font-weight:800;margin-bottom:14px}
-  .tag{display:inline-block;padding:10px 22px;border-radius:999px;font-size:28px;font-weight:700;white-space:nowrap;color:#101935}
-  .t-ucs{background:var(--coral)}.t-ucr{background:var(--mint)}.t-ns{background:var(--gray);color:#fff}.t-cs,.t-cr{background:var(--yellow)}
+  .tag{display:inline-block;padding:10px 22px;border-radius:999px;font-size:28px;font-weight:700;white-space:nowrap;color:var(--ink)}
+  .t-ucs{background:var(--plum);color:var(--on-dark)}.t-ucr{background:var(--sage-soft)}.t-ns{background:var(--slate);color:var(--on-dark)}.t-cs,.t-cr{background:var(--gold)}
   .icon svg{display:block;width:100%;height:100%}
-  .bubble{width:120px;height:120px;border-radius:50%;background:#fff;color:#101935;font-size:84px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-  .bubble.y{background:var(--yellow)}
+  .bubble{width:120px;height:120px;border-radius:50%;background:var(--surface);color:var(--ink);font-size:84px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(58,58,58,.18)}
+  .bubble.y{background:var(--gold);color:var(--ink)}
   .formula{display:flex;align-items:center;justify-content:center;gap:22px;width:1000px;font-size:56px;font-weight:800}
-  .formula .pill{padding:16px 34px;border-radius:24px;color:#101935}
+  .formula .pill{padding:16px 34px;border-radius:20px;color:var(--ink)}
   .formula .op{color:var(--muted)}
+  .formula .pill.t-ucs,.formula .pill.t-ns{color:var(--on-dark)}
   .rowlabel{width:960px;font-size:30px;font-weight:800;letter-spacing:.2em;color:var(--muted);text-align:center}
-  .card{width:960px;height:250px;border-radius:40px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:36px;padding:0 44px}
+  .card{width:960px;height:250px;border-radius:20px;background:var(--surface);border:2px solid var(--sand);box-shadow:0 12px 40px rgba(58,58,58,.07);display:flex;align-items:center;gap:36px;padding:0 44px}
   .card .ic{width:170px;height:170px;flex:none}
   .card .ct b{display:block;font-size:50px;font-weight:800;margin-bottom:8px}
   .card .ct span{font-size:38px;font-weight:600;color:var(--muted);line-height:1.25}
-  .cta{padding:30px 56px;border-radius:999px;background:var(--yellow);color:#101935;font-size:44px;font-weight:800;white-space:nowrap;box-shadow:0 14px 50px rgba(255,201,60,.35)}
+  .cta{padding:30px 56px;border-radius:999px;background:var(--gold);color:var(--ink);font-size:44px;font-weight:800;white-space:nowrap;box-shadow:0 14px 40px rgba(214,153,0,.25)}
   #brand{position:absolute;left:60px;top:150px;font-size:28px;font-weight:800;letter-spacing:.18em;color:var(--muted);opacity:.75}
-  #brand i{font-style:normal;color:var(--yellow)}
-  #bar{position:absolute;left:60px;top:118px;width:960px;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden}
-  #bar div{height:100%;width:0;background:var(--yellow);border-radius:8px}
-  .counter{font-size:150px;font-weight:900;color:var(--yellow);text-align:center;width:500px;line-height:1}
+  #brand i{font-style:normal;color:var(--gold-text)}
+  #bar{position:absolute;left:60px;top:118px;width:960px;height:8px;border-radius:8px;background:var(--sand);overflow:hidden}
+  #bar div{height:100%;width:0;background:var(--gold);border-radius:8px}
+  .counter{font-size:150px;font-weight:900;color:var(--gold);text-align:center;width:500px;line-height:1}
   .counter small{display:block;font-size:34px;font-weight:700;color:var(--muted);letter-spacing:.14em;margin-top:6px}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div class="blob" id="b1" style="width:900px;height:900px;background:#3B2E8F"></div>
-  <div class="blob" id="b2" style="width:800px;height:800px;background:#0E6B78"></div>
+  <div class="band" id="b1" style="background:var(--sand);top:1640px"></div>
+  <div class="band" id="b2" style="background:var(--stone);top:1790px"></div>
   <div id="grid"></div>
   <div id="bar"><div></div></div>
   <div id="brand">PSYCHOLOGIE <i>·</i> KURZ ERKLÄRT</div>
@@ -98,7 +104,7 @@
   <div class="scene" data-out="29.5">
     <div class="el chip" data-x="540" data-y="300" data-in="20.2">SCHRITT 2</div>
     <div class="el txt h-m" data-x="540" data-y="400" data-in="20.4">Während des Lernens</div>
-    <div class="el txt p" data-x="540" data-y="500" data-in="20.8">Glocke + Futter – <span class="hl" data-hl="21.3" style="color:#fff">immer zusammen</span></div>
+    <div class="el txt p" data-x="540" data-y="500" data-in="20.8">Glocke + Futter – <span class="hl" data-hl="21.3" style="color:var(--ink)">immer zusammen</span></div>
 
     <div class="el icon bell" id="bell4" data-x="270" data-y="760" data-in="21.0" data-anim="pop" style="width:210px;height:230px" data-icon="bell"></div>
     <div class="el txt h-l" data-x="540" data-y="770" data-in="21.2" data-anim="pop" style="width:120px;color:var(--muted)">+</div>
@@ -139,7 +145,7 @@
     </div>
     <div class="el rowlabel" data-x="540" data-y="1080" data-in="39.8">NACHHER</div>
     <div class="el formula" id="final6" data-x="540" data-y="1190" data-in="40.0" data-anim="pop" style="font-size:84px">
-      <span class="pill t-cs" style="box-shadow:0 0 60px rgba(255,201,60,.5)">CS</span><span class="op">→</span><span class="pill t-cr" style="box-shadow:0 0 60px rgba(255,201,60,.5)">CR</span>
+      <span class="pill t-cs" style="box-shadow:0 10px 40px rgba(214,153,0,.35)">CS</span><span class="op">→</span><span class="pill t-cr" style="box-shadow:0 10px 40px rgba(214,153,0,.35)">CR</span>
     </div>
     <div class="el txt h-s" data-x="540" data-y="1420" data-in="41.0">Aus dem <span class="m">neutralen Reiz</span><br>wird ein <span class="hl y" data-hl="41.5">Signal</span>.</div>
   </div>
@@ -186,68 +192,68 @@ const prog=(t,t0,d)=>clamp((t-t0)/d);
 /* ---------- Icons (SVG) ---------- */
 const ICONS = {
   dog:()=>`<svg viewBox="0 0 240 240">
-    <ellipse class="ear" cx="52" cy="105" rx="30" ry="62" fill="#7A4A24" transform="rotate(18 52 105)"/>
-    <ellipse class="ear" cx="188" cy="105" rx="30" ry="62" fill="#7A4A24" transform="rotate(-18 188 105)"/>
-    <circle cx="120" cy="118" r="82" fill="#E3A86B"/>
-    <ellipse cx="160" cy="80" rx="26" ry="22" fill="#C98A4E"/>
-    <ellipse cx="120" cy="160" rx="50" ry="38" fill="#F7D9B3"/>
+    <ellipse class="ear" cx="52" cy="105" rx="30" ry="62" fill="#b27d3d" transform="rotate(18 52 105)"/>
+    <ellipse class="ear" cx="188" cy="105" rx="30" ry="62" fill="#b27d3d" transform="rotate(-18 188 105)"/>
+    <circle cx="120" cy="118" r="82" fill="#e3bb7c"/>
+    <ellipse cx="160" cy="80" rx="26" ry="22" fill="#c9974f"/>
+    <ellipse cx="120" cy="160" rx="50" ry="38" fill="#f6eedf"/>
     <g class="eyes">
-      <circle cx="90" cy="110" r="10" fill="#1B1B2F"/><circle cx="150" cy="110" r="10" fill="#1B1B2F"/>
+      <circle cx="90" cy="110" r="10" fill="#3a3a3a"/><circle cx="150" cy="110" r="10" fill="#3a3a3a"/>
       <circle cx="93" cy="106" r="3.5" fill="#fff"/><circle cx="153" cy="106" r="3.5" fill="#fff"/>
     </g>
-    <ellipse cx="120" cy="140" rx="15" ry="10.5" fill="#1B1B2F"/>
-    <path class="mouth" d="M100 160 Q120 176 140 160" stroke="#1B1B2F" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <path class="tongue" d="M108 166 Q108 196 120 198 Q132 196 132 166 Z" fill="#FF7A8A" opacity="0"/>
+    <ellipse cx="120" cy="140" rx="15" ry="10.5" fill="#3a3a3a"/>
+    <path class="mouth" d="M100 160 Q120 176 140 160" stroke="#3a3a3a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path class="tongue" d="M108 166 Q108 196 120 198 Q132 196 132 166 Z" fill="#d98f9a" opacity="0"/>
     <g class="drops">
-      <path d="M0 -14 Q9 0 0 8 Q-9 0 0 -14 Z" fill="#7FD8FF"/>
-      <path d="M0 -14 Q9 0 0 8 Q-9 0 0 -14 Z" fill="#7FD8FF"/>
-      <path d="M0 -14 Q9 0 0 8 Q-9 0 0 -14 Z" fill="#7FD8FF"/>
+      <path d="M0 -14 Q9 0 0 8 Q-9 0 0 -14 Z" fill="#8fa8cc"/>
+      <path d="M0 -14 Q9 0 0 8 Q-9 0 0 -14 Z" fill="#8fa8cc"/>
+      <path d="M0 -14 Q9 0 0 8 Q-9 0 0 -14 Z" fill="#8fa8cc"/>
     </g>
   </svg>`,
   bell:()=>`<svg viewBox="0 0 200 220" style="overflow:visible">
-    <g class="waves" fill="none" stroke="#FFC93C" stroke-width="7" stroke-linecap="round" opacity="0">
+    <g class="waves" fill="none" stroke="#d69900" stroke-width="7" stroke-linecap="round" opacity="0">
       <path d="M18 70 Q0 100 18 130"/><path d="M-6 52 Q-32 100 -6 148"/>
       <path d="M182 70 Q200 100 182 130"/><path d="M206 52 Q232 100 206 148"/>
     </g>
     <g class="body">
-      <circle cx="100" cy="24" r="12" fill="#E0A51E"/>
-      <circle class="clap" cx="100" cy="182" r="16" fill="#E0A51E"/>
-      <path d="M100 30 C62 30 52 72 50 112 C48 140 38 152 26 166 L174 166 C162 152 152 140 150 112 C148 72 138 30 100 30 Z" fill="#FFC93C"/>
-      <rect x="20" y="160" width="160" height="18" rx="9" fill="#F2B21F"/>
-      <path d="M78 58 C66 72 64 94 63 118" stroke="#FFE59A" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <circle cx="100" cy="24" r="12" fill="#b27d3d"/>
+      <circle class="clap" cx="100" cy="182" r="16" fill="#b27d3d"/>
+      <path d="M100 30 C62 30 52 72 50 112 C48 140 38 152 26 166 L174 166 C162 152 152 140 150 112 C148 72 138 30 100 30 Z" fill="#d69900"/>
+      <rect x="20" y="160" width="160" height="18" rx="9" fill="#b27d3d"/>
+      <path d="M78 58 C66 72 64 94 63 118" stroke="#f1cf73" stroke-width="9" fill="none" stroke-linecap="round"/>
     </g>
   </svg>`,
   bowl:()=>`<svg viewBox="0 0 270 180">
-    <circle cx="95" cy="70" r="20" fill="#9A5B2E"/><circle cx="135" cy="58" r="22" fill="#B56D38"/>
-    <circle cx="175" cy="70" r="20" fill="#9A5B2E"/><circle cx="118" cy="80" r="18" fill="#B56D38"/>
-    <circle cx="155" cy="82" r="18" fill="#9A5B2E"/>
-    <path d="M18 86 L252 86 Q240 168 135 168 Q30 168 18 86 Z" fill="#FF6B6B"/>
-    <rect x="10" y="80" width="250" height="16" rx="8" fill="#FF8B8B"/>
-    <path d="M105 128 l8 -8 a8 8 0 1 1 10 10 l14 0 a8 8 0 1 1 10 -10 l8 8 l-8 8 a8 8 0 1 1 -10 10 l-14 0 a8 8 0 1 1 -10 -10 z" fill="#FFE3E3" opacity=".9"/>
+    <circle cx="95" cy="70" r="20" fill="#8a5f2c"/><circle cx="135" cy="58" r="22" fill="#b27d3d"/>
+    <circle cx="175" cy="70" r="20" fill="#8a5f2c"/><circle cx="118" cy="80" r="18" fill="#b27d3d"/>
+    <circle cx="155" cy="82" r="18" fill="#8a5f2c"/>
+    <path d="M18 86 L252 86 Q240 168 135 168 Q30 168 18 86 Z" fill="#754c6e"/>
+    <rect x="10" y="80" width="250" height="16" rx="8" fill="#a0849c"/>
+    <path d="M105 128 l8 -8 a8 8 0 1 1 10 10 l14 0 a8 8 0 1 1 10 -10 l8 8 l-8 8 a8 8 0 1 1 -10 10 l-14 0 a8 8 0 1 1 -10 -10 z" fill="#d1c3cf" opacity=".9"/>
   </svg>`,
   chips:()=>`<svg viewBox="0 0 220 280">
-    <path d="M30 20 L50 34 L70 20 L90 34 L110 20 L130 34 L150 20 L170 34 L190 20 L180 140 L194 262 L174 248 L154 262 L134 248 L114 262 L94 248 L74 262 L54 248 L34 262 L44 140 Z" fill="#FF6B6B"/>
-    <path d="M44 60 L180 60" stroke="#FF9A9A" stroke-width="8"/>
-    <circle cx="112" cy="150" r="56" fill="#FFC93C"/>
-    <text x="112" y="164" text-anchor="middle" font-family="Inter" font-weight="900" font-size="38" fill="#101935">CHIPS</text>
+    <path d="M30 20 L50 34 L70 20 L90 34 L110 20 L130 34 L150 20 L170 34 L190 20 L180 140 L194 262 L174 248 L154 262 L134 248 L114 262 L94 248 L74 262 L54 248 L34 262 L44 140 Z" fill="#738561"/>
+    <path d="M44 60 L180 60" stroke="#9bae8d" stroke-width="8"/>
+    <circle cx="112" cy="150" r="56" fill="#d69900"/>
+    <text x="112" y="164" text-anchor="middle" font-family="Inter" font-weight="900" font-size="38" fill="#3a3a3a">CHIPS</text>
     <path d="M58 92 L72 210" stroke="#fff" stroke-opacity=".25" stroke-width="10" stroke-linecap="round"/>
   </svg>`,
   phone:()=>`<svg viewBox="0 0 170 170" style="overflow:visible">
-    <rect x="45" y="10" width="80" height="150" rx="16" fill="#E8ECFF"/>
-    <rect x="52" y="24" width="66" height="118" rx="6" fill="#26315E"/>
-    <rect x="60" y="40" width="50" height="16" rx="5" fill="#4ECDC4"/>
-    <rect x="60" y="64" width="38" height="10" rx="5" fill="#5E6AA0"/>
-    <circle class="badge" cx="122" cy="16" r="20" fill="#FF6B6B"/>
+    <rect x="45" y="10" width="80" height="150" rx="16" fill="#3a3a3a"/>
+    <rect x="52" y="24" width="66" height="118" rx="6" fill="#5a6886"/>
+    <rect x="60" y="40" width="50" height="16" rx="5" fill="#d69900"/>
+    <rect x="60" y="64" width="38" height="10" rx="5" fill="#cdcbbc"/>
+    <circle class="badge" cx="122" cy="16" r="20" fill="#754c6e"/>
   </svg>`,
   note:()=>`<svg viewBox="0 0 170 170">
-    <path d="M70 30 L140 16 L140 110" stroke="#8B7CF6" stroke-width="12" fill="none" stroke-linejoin="round"/>
-    <path d="M70 30 L70 130" stroke="#8B7CF6" stroke-width="12"/>
-    <ellipse cx="52" cy="132" rx="24" ry="18" fill="#8B7CF6"/>
-    <ellipse cx="122" cy="112" rx="24" ry="18" fill="#8B7CF6"/>
+    <path d="M70 30 L140 16 L140 110" stroke="#738561" stroke-width="12" fill="none" stroke-linejoin="round"/>
+    <path d="M70 30 L70 130" stroke="#738561" stroke-width="12"/>
+    <ellipse cx="52" cy="132" rx="24" ry="18" fill="#738561"/>
+    <ellipse cx="122" cy="112" rx="24" ry="18" fill="#738561"/>
   </svg>`,
   arrow:()=>`<svg viewBox="0 0 240 60" style="overflow:visible">
-    <path class="shaft" d="M10 30 L200 30" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" fill="none" stroke-dasharray="200" stroke-dashoffset="200"/>
-    <path class="head" d="M186 8 L222 30 L186 52" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0"/>
+    <path class="shaft" d="M10 30 L200 30" stroke="#3a3a3a" stroke-width="10" stroke-linecap="round" fill="none" stroke-dasharray="200" stroke-dashoffset="200"/>
+    <path class="head" d="M186 8 L222 30 L186 52" stroke="#3a3a3a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0"/>
   </svg>`
 };
 
@@ -374,8 +380,8 @@ function seek(t){
   els.forEach(el=>applyEl(el,t));
   inner.forEach(n=>{n.style.transform=`translate(${n.ex.dx}px,${n.ex.dy}px) rotate(${n.ex.r}deg) scale(${n.ex.s})`;});
   hls.forEach(h=>{ h.style.backgroundSize=`${easeOut(prog(t,+h.dataset.hl,0.5))*100}% 100%`; });
-  $('b1').style.transform=`translate(${-250+Math.sin(t*0.25)*160}px,${-200+Math.cos(t*0.2)*220}px)`;
-  $('b2').style.transform=`translate(${450+Math.cos(t*0.22)*180}px,${1250+Math.sin(t*0.3)*200}px)`;
+  $('b1').style.transform=`rotate(-6deg) translateX(${Math.sin(t*0.3)*40}px)`;
+  $('b2').style.transform=`rotate(-6deg) translateX(${Math.cos(t*0.25)*50}px)`;
   document.querySelector('#bar div').style.width=(t/DURATION*100)+'%';
 }
 window.seek=seek;
